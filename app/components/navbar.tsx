@@ -5,7 +5,7 @@ import { IoMenu } from "react-icons/io5";
 
 export default function Navbar() {
     return (
-        <div className="items-center justify-between flex p-4">
+        <div className="items-center justify-between flex p-4 bg-zinc-800">
             <Link href={"/"}><div className="w-fit shrink-0 p-2 cursor-pointer flex items-center"><h1>TwitchBets</h1></div></Link> {/* Logo */}
             <div className="w-fit shrink-0 flex items-center justify-center gap-2">
                 <Button className="hover:bg-sky-700 rounded px-2 py-1 cursor-pointer">Login</Button>
