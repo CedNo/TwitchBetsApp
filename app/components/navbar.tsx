@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import Button from './button';
+import Button from '@/app/components/button';
 import { IoMenu } from "react-icons/io5";
 
 export default function Navbar() {

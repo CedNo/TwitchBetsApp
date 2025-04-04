@@ -1,5 +1,5 @@
-import BetCard from "./components/bet-card";
-import {BETS} from "./constants";
+import BetCard from "@/app/components/bet-card";
+import {BETS} from "@/app/constants";
 
 export default function Home() {
   
