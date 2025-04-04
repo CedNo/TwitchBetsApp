@@ -7,7 +7,7 @@ type ButtonProps = {
 
 const Button: React.FC<ButtonProps> = ({ children, className }) => {
     return (
-        <button className={`btn ${className || ''}`}>
+        <button className={`btn ${className || ''} cursor-pointer`}>
             {children}
         </button>
     );

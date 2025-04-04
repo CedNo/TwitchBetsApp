@@ -1,10 +1,10 @@
 import Image from "next/image";
-import type { Bet } from "../types/bet";
+import type { Bet } from "@/app/types/bet";
 import Link from "next/link";
 
 export default function BetCard({ bet }: { bet: Bet }) {
     return (
-        <Link href={`/bet?id=${bet.id}`}>
+        <Link href={`/bet/${encodeURIComponent(bet.id)}`}>
             <div className="h-40 w-80 bg-secondary-bg rounded-lg flex flex-col items-center p-4 m-2 shadow-md hover:shadow-lg transition-shadow duration-300 ease-in-out cursor-pointer">
                 <div className="flex items-center justify-start mb-2">
                     <Image src={bet.image} width={100} height={100} alt="Bet Image" className="w-8 h-8 rounded-full mr-2" />
