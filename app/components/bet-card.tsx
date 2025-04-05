@@ -13,7 +13,7 @@ export default function BetCard({ bet }: { bet: Bet }) {
                 <div className="pb-2 flex flex-col overflow-y-scroll items-start w-full">
                     {
                         bet.betOptions.map((option, index) => (
-                            <div key={index} className="flex flex-row items-center justify-between border-solid border-gray-500 border-1 w-full p-1 rounded-md mb-1 text-sm pl-2 pr-2">
+                            <div key={index} className="flex flex-row items-center justify-between border-solid border-foreground border-1 w-full p-1 rounded-md mb-1 text-sm pl-2 pr-2">
                                 <div>{option.option}</div>
                                 <div>{option.odds}%</div>
                             </div>
