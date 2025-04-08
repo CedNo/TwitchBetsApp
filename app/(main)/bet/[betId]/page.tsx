@@ -1,8 +1,8 @@
 'use client'
 
 import React from "react";
-import BetChart from "@/app/bet/[betId]/components/bet-chart";
-import BetOption from "@/app/bet/[betId]/components/bet-option";
+import BetChart from "@/app/(main)/bet/[betId]/components/bet-chart";
+import BetOption from "@/app/(main)/bet/[betId]/components/bet-option";
 import { FaRegClock } from "react-icons/fa"
 
 import { BETS } from "@/app/constants";
