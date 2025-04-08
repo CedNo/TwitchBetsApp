@@ -1,29 +1,8 @@
-'use client'
-
-import Button from "@/app/components/button";
 import Link from "next/link";
-import { useState } from 'react'
-import { FaEye } from "react-icons/fa6";
-import { FaEyeSlash } from "react-icons/fa6";
+import Button from "@/app/components/button";
+import PasswordField from "@/app/components/password-field";
 
 export default function Login() {
-
-    const eye = <FaEye className="absolute mr-10" size={25}/>;
-    const eyeOff = <FaEyeSlash className="absolute mr-10" size={25}/>;
-
-    const [password, setPassword] = useState("");
-    const [type, setType] = useState('password');
-    const [icon, setIcon] = useState(eyeOff);
-
-    const handleToggle = () => {
-        if (type === 'password'){
-           setIcon(eye);
-           setType('text')
-        } else {
-           setIcon(eyeOff)
-           setType('password')
-        }
-     }
 
     return (
         <div className="px-4 md:px-0">
@@ -34,20 +13,7 @@ export default function Login() {
                     type="text"
                     placeholder="Username"
                 />
-                <div className="flex items-center">
-                    <input
-                        className="w-full pr-8 border p-2 rounded-md focus:outline-none focus:border-secondary-button-hover"
-                        type={type}
-                        name="password"
-                        placeholder="Password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        autoComplete="current-password"
-                    />
-                    <span className="flex justify-around h-[25px]" onClick={handleToggle}>
-                        {icon}
-                    </span>
-                </div>
+                <PasswordField value=""/>
                 <div className="flex flex-row justify-between text-sm">
                     <label className="flex items-center gap-2">
                         <input type="checkbox" className="w-3 h-3" />
@@ -58,7 +24,7 @@ export default function Login() {
                     </Link>
                 </div>
                 <Button className="w-full p-2 rounded-md bg-secondary-button hover:bg-secondary-button-hover transition mx-auto">
-                    Get Betting
+                    Start Betting
                 </Button>
                 <div className="flex flex-row gap-2 *:my-auto">
                     <hr className="w-full opacity-15"></hr>
@@ -67,7 +33,7 @@ export default function Login() {
                 </div>
                 <div className="flex gap-4 text-sm w-fit mx-auto">
                     <label>Don&apos;t have an account?</label>
-                    <Link href="/" className="text-blue-500 hover:underline">
+                    <Link href="/signup" className="text-blue-500 hover:underline">
                         Register
                     </Link>
                 </div>

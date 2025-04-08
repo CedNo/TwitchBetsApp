@@ -4,7 +4,7 @@ import { FaGithub } from "react-icons/fa";
 import { FaDiscord } from "react-icons/fa";
 import { FaRegCopyright } from "react-icons/fa";
 
-export default function Footer() {
+export default function Footer({ hideLinks=false } : { hideLinks? : boolean }) {
     return(
         <footer className="p-4 bg-secondary-bg rounded-t-3xl">
             <div className="pl-5 pt-5">
@@ -14,7 +14,7 @@ export default function Footer() {
                     <p className="text-sm">All rights reserved</p>
                 </div>
             </div>
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-2 divide-foreground divide-y-1 sm:divide-y-0 sm:divide-x-1 *:h-full">
+            <div className={`${hideLinks ? 'hidden' : '' } flex flex-col sm:flex-row items-center justify-between gap-2 divide-foreground divide-y-1 sm:divide-y-0 sm:divide-x-1 *:h-full`}>
                 <div className="w-full flex flex-row gap-10 p-10 justify-around">
                         <ul className=" flex flex-col items-start justify-center gap-4 whitespace-nowrap text-l font-bold">
                             <li>Your profile</li>

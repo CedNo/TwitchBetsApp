@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import "@/app/globals.css";
 import Navbar from "@/app/components/navbar";
 import Footer from "@/app/components/footer";
 
@@ -28,9 +28,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <div className="flex flex-col h-screen justify-between">
-          <Navbar />
+          <Navbar hideButtons={true} />
           {children}
-          <Footer />
+          <Footer hideLinks={true} />
         </div>
       </body>
     </html>
