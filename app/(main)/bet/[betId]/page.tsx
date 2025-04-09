@@ -34,7 +34,7 @@ export default function Bet({
 					<p className="cursor-default">Ends on {bet.endDate?.toLocaleString()}</p>
 				</div>
 			</div>
-			<div className="items-center rounded-lg bg-secondary-bg w-full p-0 sm:h-100 sm:p-5">
+			<div className="items-center rounded-lg bg-secondary-bg w-full h-50 p-0 sm:h-100 sm:p-5">
 				<BetChart className="mx-auto"/>
 			</div>
 			<div className="flex flex-col gap-3 border-t-1 border-t-primary-bg w-full pt-10">

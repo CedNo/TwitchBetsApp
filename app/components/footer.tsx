@@ -17,7 +17,7 @@ export default function Footer({ hideLinks=false } : { hideLinks? : boolean }) {
             <div className={`${hideLinks ? 'hidden' : '' } flex flex-col sm:flex-row items-center justify-between gap-2 divide-foreground divide-y-1 sm:divide-y-0 sm:divide-x-1 *:h-full`}>
                 <div className="w-full flex flex-row gap-10 p-10 justify-around">
                         <ul className=" flex flex-col items-start justify-center gap-4 whitespace-nowrap text-l font-bold">
-                            <li>Your profile</li>
+                            <li><Link href={"/profile"}>Your profile</Link></li>
                             <li>Browse</li>
                             <li>Stats</li>
                             <li>Learn</li>
