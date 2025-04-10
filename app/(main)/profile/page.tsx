@@ -50,7 +50,7 @@ export default function Profile() {
                 <div className="flex flex-col gap-2">
                     {getLatestBets(betWins)}
                 </div>
-                <Link href={"/"} className="w-fit pl-4 text-blue-500 hover:underline">View complete history</Link>
+                <Link href={"/"} className="w-fit pl-4 text-link hover:underline">View complete history</Link>
             </div>
         </div>
     );

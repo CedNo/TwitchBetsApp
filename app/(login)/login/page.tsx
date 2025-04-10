@@ -19,7 +19,7 @@ export default function Login() {
                         <input type="checkbox" className="w-3 h-3" />
                         Remember me
                     </label>
-                    <Link className="text-blue-500 hover:underline" href="/">
+                    <Link className="text-link hover:underline" href="/">
                         Forgot password?
                     </Link>
                 </div>
@@ -33,7 +33,7 @@ export default function Login() {
                 </div>
                 <div className="flex gap-4 text-sm w-fit mx-auto">
                     <label>Don&apos;t have an account?</label>
-                    <Link href="/signup" className="text-blue-500 hover:underline">
+                    <Link href="/signup" className="text-link hover:underline">
                         Register
                     </Link>
                 </div>
