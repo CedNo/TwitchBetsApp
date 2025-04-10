@@ -1,28 +1,37 @@
+import { ChartData } from "@/app/types/chart-data";
 import { LineChart } from "@mui/x-charts";
 
-export default function BetChart({className} : {className?: string}) {
+export default function BetChart({ className, color, data } : { className? : string, color? : string, data : ChartData }) {
+
+    const xData = data.xData;
+    const yData = data.yData;
 
     return (
         <LineChart
             className={className}
             sx={{
                 "& .MuiChartsAxis-tickLabel":{
-                    fill:'#ffffff'
+                    fill: color + "!important"
                 },
                 "& .MuiChartsAxis-line":{
-                stroke:'#ffffff'
+                    stroke: color + "!important"
                 },
                 "& .MuiChartsAxis-tick":{
-                    stroke:'#ffffff'
+                    stroke: color + "!important"
                 }
             }}
-            xAxis={[{ data: [1, 2, 3, 5, 8, 10]}]}
-            series={[
-                {
-                data: [2, 5.5, 2, 8.5, 1.5, 5],
-                },
+            xAxis={[{
+                scaleType: 'utc',
+                data: xData,
+                valueFormatter: (day : Date) => formatDate(day),
+            }]}
+            series={[{ data: yData },
             ]}
-            colors={['#ffffff', '#ffffff']}
+            colors={[color ?? '#ffffff', color ?? '#ffffff']}
         />
     );
+}
+
+function formatDate(day : Date) : string {
+    return `${('0' + day.getDate()).slice(-2)}/${('0' + (day.getMonth()+1)).slice(-2)}`;
 }
