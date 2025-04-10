@@ -2,11 +2,12 @@
 
 :root {
   --background: #e6e6e6;
-  --foreground: hwb(0 9% 91%);
+  --foreground: #171717;
   --secondary-bg: #faa865;
   --ternary-bg: #fab882;
   --secondary-button: #e6e6e6;
   --secondary-button-hover: #f5f5f5;
+  --link: #1c6adf;
 }
 
 @theme inline {
@@ -16,6 +17,7 @@
   --color-ternary-bg: var(--ternary-bg);
   --color-secondary-button: var(--secondary-button);
   --color-secondary-button-hover: var(--secondary-button-hover);
+  --color-link: var(--link);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
@@ -28,6 +30,7 @@
     --ternary-bg: #3f4249;
     --secondary-button: #28477c;
     --secondary-button-hover: #30538f;
+    --link: #1c6adf;
   }
 }
 
