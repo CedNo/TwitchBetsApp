@@ -1,11 +1,12 @@
 'use client'
 
-import { LineChart } from "@mui/x-charts";
 import Image from "next/image";
 import Link from "next/link";
 import { formatNumber } from "@/app/utilities";
+import Chart from "@/app/components/chart";
 
 import { BETS } from "@/app/constants";
+import { CHART_DATA } from "@/app/constants";
 
 export default function Profile() {
 
@@ -41,15 +42,7 @@ export default function Profile() {
             <div className="flex flex-col gap-4 bg-secondary-bg rounded-lg">
                 <p className="text-3xl p-4">History</p>
                 <div className="p-0 sm:p-4 h-50 sm:h-100">
-                    <LineChart 
-                        xAxis={[{ data: [1, 2, 3, 5, 8, 10]}]}
-                        series={[
-                            {
-                            data: [2, 5.5, 2, 8.5, 1.5, 5],
-                            color: "#FFFFFF"
-                            },
-                        ]}
-                    />
+                    <Chart className="mx-auto" color="#FFFFFF" data={CHART_DATA}/>
                 </div>
             </div>
             <div className="flex flex-col gap-4 bg-secondary-bg rounded-lg p-4">
@@ -57,7 +50,7 @@ export default function Profile() {
                 <div className="flex flex-col gap-2">
                     {getLatestBets(betWins)}
                 </div>
-                <Link href={"/"} className="w-fit pl-4 text-blue-500 hover:underline">View complete history</Link>
+                <Link href={"/"} className="w-fit pl-4 text-link hover:underline">View complete history</Link>
             </div>
         </div>
     );

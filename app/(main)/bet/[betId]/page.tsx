@@ -1,11 +1,12 @@
 'use client'
 
 import React from "react";
-import BetChart from "@/app/(main)/bet/[betId]/components/bet-chart";
+import Chart from "@/app/components/chart";
 import BetOption from "@/app/(main)/bet/[betId]/components/bet-option";
 import { FaRegClock } from "react-icons/fa"
 
 import { BETS } from "@/app/constants";
+import { CHART_DATA } from "@/app/constants";
 
 export default function Bet({
 		params,
@@ -18,7 +19,9 @@ export default function Bet({
     const bet = BETS.find((bet) => bet.id === betId);
 
 	if (!bet) {
-		return <h1 className='text-5xl text-center mt-10'><span className="text-secondary-bg">404 | </span>Bet not found</h1>;
+		return 	<h1 className='text-5xl text-center mt-10'>
+					<span className="opacity-50">404 | </span>Bet not found
+				</h1>;
 	}
 
 	const betOptions = bet?.betOptions.map((option, index) => (
@@ -35,7 +38,7 @@ export default function Bet({
 				</div>
 			</div>
 			<div className="items-center rounded-lg bg-secondary-bg w-full h-50 p-0 sm:h-100 sm:p-5">
-				<BetChart className="mx-auto"/>
+				<Chart className="mx-auto" color="#FFFFFF" data={CHART_DATA}/>
 			</div>
 			<div className="flex flex-col gap-3 border-t-1 border-t-primary-bg w-full pt-10">
 				{betOptions}

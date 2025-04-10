@@ -24,7 +24,7 @@ export default function SignUp() {
                 </div>
                 <div className="flex gap-4 text-sm w-fit mx-auto">
                     <label>Already have an account?</label>
-                    <Link href="/login" className="text-blue-500 hover:underline">
+                    <Link href="/login" className="text-link hover:underline">
                         Log in
                     </Link>
                 </div>
