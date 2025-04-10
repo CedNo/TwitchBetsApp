@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { formatNumber } from "@/app/utilities";
-import BetChart from "@/app/components/chart";
+import Chart from "@/app/components/chart";
 
 import { BETS } from "@/app/constants";
 import { CHART_DATA } from "@/app/constants";
@@ -42,7 +42,7 @@ export default function Profile() {
             <div className="flex flex-col gap-4 bg-secondary-bg rounded-lg">
                 <p className="text-3xl p-4">History</p>
                 <div className="p-0 sm:p-4 h-50 sm:h-100">
-                    <BetChart className="mx-auto" color="#FFFFFF" data={CHART_DATA}/>
+                    <Chart className="mx-auto" color="#FFFFFF" data={CHART_DATA}/>
                 </div>
             </div>
             <div className="flex flex-col gap-4 bg-secondary-bg rounded-lg p-4">

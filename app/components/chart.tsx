@@ -1,7 +1,7 @@
 import { ChartData } from "@/app/types/chart-data";
 import { LineChart } from "@mui/x-charts";
 
-export default function BetChart({ className, color, data } : { className? : string, color? : string, data : ChartData }) {
+export default function Chart({ className, color, data } : { className? : string, color? : string, data : ChartData }) {
 
     const xData = data.xData;
     const yData = data.yData;
