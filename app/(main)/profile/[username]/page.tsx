@@ -1,14 +1,44 @@
 'use client'
 
+import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { formatNumber } from "@/app/utilities";
 import Chart from "@/app/components/chart";
+import { useState, useEffect } from "react";
+import { FaRegHourglassHalf } from "react-icons/fa6";
+import { MdError } from "react-icons/md";
 
 import { BETS } from "@/app/constants";
 import { CHART_DATA } from "@/app/constants";
+import { getUser } from "@/app/api/user_service";
 
-export default function Profile() {
+export default function Profile({
+		params,
+	}: {
+		params: Promise<{ username: string }>
+	}) {
+
+    const { username } = React.use(params);
+    const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(false);
+
+    useEffect(() => {
+        async function fetchUser() {
+            try {
+                setLoading(true);
+                const user = await getUser(username);
+                setUser(user);
+            } catch (error) {
+                console.error('Failed to fetch user:', error);
+                setError(true);
+            } finally {
+                setLoading(false);
+            }
+        }
+        fetchUser();
+    }, [username]);
 
     const wageredPoints = 750000;
     const availablePoints = 2500000;
@@ -20,8 +50,30 @@ export default function Profile() {
 
     const betWins = [{betAmount: 1500, betWin: 0}, {betAmount: 300, betWin: 450}, {betAmount: 150000, betWin: 3204105}, {betAmount: 5163, betWin: 0}];
 
+    if(loading) {
+        return (
+            <div className="flex flex-col gap-2 items-center">
+                <FaRegHourglassHalf className="text-5xl"/>
+                <p className="text-3xl">Loading {username}&apos;s profile...</p>
+            </div>
+        );
+    }
+
+    if(error) {
+        return (
+            <div className="flex flex-col gap-2 items-center">
+                <MdError className="text-5xl"/>
+                <p className="text-3xl">There was an error loading {username}&apos;s profile.</p>
+            </div>
+        );
+    }
+
     return (
         <div className="flex flex-col gap-6 w-7/8 lg:w-1/2 mx-auto my-10">
+            <div className="flex flex-row justify-between *:items-center rounded-lg bg-secondary-bg">
+                <p className="p-4">PFP</p>
+                <p className="text-3xl w-full py-4">{username}</p>
+            </div>
             <div className="flex flex-col gap-4 bg-secondary-bg rounded-lg p-4">
                 <p className="text-3xl">Balance</p>
                 <div className="flex flex-col md:flex-row justify-between gap-4 *:items-center *:rounded-lg *:bg-ternary-bg *:p-4 *:w-full">
