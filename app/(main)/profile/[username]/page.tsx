@@ -12,6 +12,7 @@ import { MdError } from "react-icons/md";
 import { BETS } from "@/app/constants";
 import { CHART_DATA } from "@/app/constants";
 import { getUser } from "@/app/api/user_service";
+import { User } from "@/app/types/user";
 
 export default function Profile({
 		params,
@@ -20,7 +21,7 @@ export default function Profile({
 	}) {
 
     const { username } = React.use(params);
-    const [user, setUser] = useState(null);
+    const [user, setUser] = useState({} as User);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
 
@@ -41,7 +42,7 @@ export default function Profile({
     }, [username]);
 
     const wageredPoints = 750000;
-    const availablePoints = 2500000;
+    const availablePoints = user.balance;
     const totalPoints = wageredPoints + availablePoints;
 
     const wageredPointsText = formatNumber(wageredPoints, 2);
