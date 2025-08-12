@@ -47,14 +47,9 @@ export default function Home() {
     );
   }
 
-  console.log('endingBetQuestions:', endingBetQuestions);
-
   const betCards = endingBetQuestions.map((betQuestion, index) => (
     <BetCard key={index} betQuestion={betQuestion} />
   ));
-
-  
-  console.log('BetCards:', betCards);
 
   return (
     <div className='my-10 m-auto w-5/6 items-center justify-center flex columns-4 flex-wrap'>
