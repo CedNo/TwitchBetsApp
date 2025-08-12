@@ -11,7 +11,7 @@ import { MdError } from "react-icons/md";
 
 import { BETS } from "@/app/constants";
 import { CHART_DATA } from "@/app/constants";
-import { getUser } from "@/app/api/user_service";
+import { getUser } from "@/app/api/services/user_service";
 import { User } from "@/app/types/user";
 
 export default function Profile({
