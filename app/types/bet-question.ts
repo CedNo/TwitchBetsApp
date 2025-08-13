@@ -6,5 +6,4 @@ export type BetQuestion = {
     options : BetOption[];
     endTime : Date;
     currentBettedAmount : number;
-    currentOddsOfOptions : Map<string, number>;
 };

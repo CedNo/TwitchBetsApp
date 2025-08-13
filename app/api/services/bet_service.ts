@@ -16,14 +16,22 @@ export const getEndingBetQuestions = async (amount: number) => {
         return response.data.map((wrapper) => {
             const question = wrapper.betQuestion;
             
-            if (question.currentOddsOfOptions && typeof question.currentOddsOfOptions === 'object') {
-                question.currentOddsOfOptions = new Map(Object.entries(question.currentOddsOfOptions));
-            }
-            
             return question;
         });
     } catch (error) {
         console.error('Error fetching ending bet questions:', error);
+        throw error;
+    }
+};
+
+export const getBetQuestionById = async (betId: string) => {
+    try {
+        const response = await API.get<{ betQuestion: BetQuestion }>(`/bets/questions/${betId}`);
+        const question = response.data.betQuestion;
+
+        return question;
+    } catch (error) {
+        console.error('Error fetching bet question by ID:', error);
         throw error;
     }
 };
