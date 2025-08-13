@@ -4,11 +4,6 @@ import Link from "next/link";
 
 export default function BetCard({ betQuestion }: { betQuestion : BetQuestion }) {
 
-    const findOptionName = (key: string) => {
-        const option = betQuestion.options.find(option => option.id === key);
-        return option ? option.option : key;
-    }
-
     return (
         <Link href={`/bet/${encodeURIComponent(betQuestion.id)}`}>
             <div className="h-40 w-80 bg-secondary-bg rounded-lg flex flex-col items-center p-4 m-2 shadow-md hover:shadow-lg transition-shadow duration-300 ease-in-out cursor-pointer">
@@ -18,10 +13,10 @@ export default function BetCard({ betQuestion }: { betQuestion : BetQuestion }) 
                 </div>
                 <div className="pb-2 flex flex-col overflow-y-scroll items-start w-full">
                     {
-                        Array.from(betQuestion.currentOddsOfOptions).map((option, index) => (
+                        Array.from(betQuestion.options).map((option, index) => (
                             <div key={index} className="flex flex-row items-center justify-between border-solid border-foreground border-1 w-full p-1 rounded-md mb-1 text-sm pl-2 pr-2">
-                                <div>{findOptionName(option[0])}</div>
-                                <div>{option[1]}%</div>
+                                <div>{option.option}</div>
+                                <div>{option.odds}%</div>
                             </div>
                         ))
                     }

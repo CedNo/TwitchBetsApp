@@ -1,6 +1,6 @@
 import Button from "@/app/components/button";
-import type { BetOption } from "@/app/types/bet";
 import { CiDollar } from "react-icons/ci";
+import type { BetOption } from "@/app/types/bet-option";
 
 export default function BetOption({ option } : { option : BetOption }) {
     return (
@@ -9,7 +9,7 @@ export default function BetOption({ option } : { option : BetOption }) {
                 <p className="font-bold text-xl">{option.option}</p>
                 <div className="flex flex-row items-center gap-1 opacity-75">
                     <CiDollar/>
-                    <p className="text-sm">${option.amount.toLocaleString()}</p>
+                    <p className="text-sm">${option.currentAmount.toLocaleString()}</p>
                     </div>
             </div>
             <p className="font-bold text-3xl content-center">{option.odds * 100}%</p>

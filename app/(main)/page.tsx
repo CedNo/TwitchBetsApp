@@ -20,7 +20,7 @@ export default function Home() {
             const endingBetQuestions = await getEndingBetQuestions(12);
             setEndingBetQuestions(endingBetQuestions);
         } catch (error) {
-            console.error('Failed to fetch user:', error);
+            console.error('Failed to fetch ending bet questions:', error);
             setError(true);
         } finally {
             setLoading(false);
