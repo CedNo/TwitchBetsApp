@@ -1,19 +1,18 @@
 'use client'
 
 import React from "react";
-import Chart from "@/app/components/chart";
 import BetOption from "@/app/(main)/bet/[betId]/components/bet-option";
 import { FaRegClock } from "react-icons/fa"
 import { FaRegHourglassHalf } from "react-icons/fa6";
 import { MdError } from "react-icons/md";
 import { useState, useEffect } from "react";
-
-import { CHART_DATA } from "@/app/constants";
+import BetQuestionChart from "@/app/components/bet_question_chart";
 import { getBetQuestionById } from "@/app/api/services/bet_service";
 
 import type { BetQuestion } from "@/app/types/bet-question";
+import type { BetSeries } from "@/app/types/chart-data";
 
-export default function Bet({
+export default function BetPage({
 		params,
 	}: {
 		params: Promise<{ betId: string }>
@@ -63,6 +62,13 @@ export default function Bet({
 		<BetOption key={index} option={option} />
 	));
 
+	const betSeries : BetSeries[] = betQuestion.options.map((option) => {
+		return {
+			name : option.option,
+			data : option.bets
+		}
+	});
+
     return (
         <div className="flex flex-col justify-center gap-10 m-auto py-10 w-7/8 lg:w-1/2">
 			<div className="flex flex-col gap-4">
@@ -72,8 +78,8 @@ export default function Bet({
 					<p className="cursor-default">Ends on {betQuestion.endTime.toLocaleString()}</p>
 				</div>
 			</div>
-			<div className="items-center rounded-lg bg-secondary-bg w-full h-50 p-0 sm:h-100 sm:p-5">
-				<Chart className="mx-auto" color="#FFFFFF" data={CHART_DATA}/>
+			<div className="items-center rounded-lg bg-secondary-bg w-full p-0 sm:h-100 sm:p-5">
+				<BetQuestionChart className="mx-auto" color="#FFFFFF" data={betSeries}/>
 			</div>
 			<div className="flex flex-col gap-3 border-t-1 border-t-primary-bg w-full pt-10">
 				{betOptions}
