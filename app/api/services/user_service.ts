@@ -12,7 +12,7 @@ const API = axios.create({
 export const getUser = async (username: string) => {
     try {
         const response = await API.get(`/users/${username}`);
-        const user: User = response.data.user;
+        const user: User = response.data;
         return user;
     } catch (error) {
         console.error('Error fetching user:', error);

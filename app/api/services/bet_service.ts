@@ -11,13 +11,9 @@ const API = axios.create({
 
 export const getEndingBetQuestions = async (amount: number) => {
     try {
-        const response = await API.get<{ betQuestion: BetQuestion }[]>(`/bets/questions/ending?amount=${amount}`);
-  
-        return response.data.map((wrapper) => {
-            const question = wrapper.betQuestion;
-            
-            return question;
-        });
+        const response = await API.get<BetQuestion []>(`/bets/questions/ending?amount=${amount}`);
+        const questions: BetQuestion[] = response.data;
+        return questions;
     } catch (error) {
         console.error('Error fetching ending bet questions:', error);
         throw error;
@@ -26,8 +22,8 @@ export const getEndingBetQuestions = async (amount: number) => {
 
 export const getBetQuestionById = async (betId: string) => {
     try {
-        const response = await API.get<{ betQuestion: BetQuestion }>(`/bets/questions/${betId}`);
-        const question = response.data.betQuestion;
+        const response = await API.get<BetQuestion>(`/bets/questions/${betId}`);
+        const question = response.data;
 
         return question;
     } catch (error) {
