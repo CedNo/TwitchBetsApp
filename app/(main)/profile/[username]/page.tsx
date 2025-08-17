@@ -9,7 +9,6 @@ import { useState, useEffect } from "react";
 import { FaRegHourglassHalf } from "react-icons/fa6";
 import { MdError } from "react-icons/md";
 
-import { BETS } from "@/app/constants";
 import { CHART_DATA } from "@/app/constants";
 import { getUser } from "@/app/api/services/user_service";
 import { User } from "@/app/types/user";
@@ -99,9 +98,9 @@ export default function Profile({
                 </div>
             </div>
             <div className="flex flex-col gap-4 bg-secondary-bg rounded-lg p-4">
-                <p className="text-3xl">Your latest bets</p>
+                <p className="text-3xl">Latest bets</p>
                 <div className="flex flex-col gap-2">
-                    {getLatestBets(betWins)}
+                    {/* {getLatestBets(betWins)} */}
                 </div>
                 <Link href={"/"} className="w-fit pl-4 text-link hover:underline">View complete history</Link>
             </div>
