@@ -1,9 +1,9 @@
-import type { Bet } from "@/app/types/bet";
+import type { Wager } from "@/app/types/wager";
 
 export type BetOption = {
     id : string;
     option : string;
-    bets : Bet[];
+    bets : Wager[];
     currentAmount : number;
     odds : number;
 };
