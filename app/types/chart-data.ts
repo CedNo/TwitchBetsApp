@@ -1,4 +1,4 @@
-import type { Bet } from '@/app/types/bet';
+import type { Wager } from '@/app/types/wager';
 
 export type ChartData = {
     xData: Date[],
@@ -7,5 +7,5 @@ export type ChartData = {
 
 export type BetSeries = {
     name: string;
-    data: Bet[];
+    data: Wager[];
 };
