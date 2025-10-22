@@ -12,7 +12,7 @@ export default function BetOption({ option } : { option : BetOption }) {
                     <p className="text-sm">${option.currentAmount.toLocaleString()}</p>
                     </div>
             </div>
-            <p className="font-bold text-3xl content-center">{option.odds * 100}%</p>
+            <p className="font-bold text-3xl content-center">{(option.odds * 100).toFixed(2)}%</p>
             <Button className="bg-green-600 rounded px-6 hover:bg-green-500 duration-200 ease-in-out">Buy</Button>
         </div>
     );

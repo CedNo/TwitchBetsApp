@@ -58,7 +58,7 @@ export default function BetPage({
 		);
 	}
 
-	const betOptions = betQuestion.options.map((option, index) => (
+	const betOptions = betQuestion.options.sort((a, b) => b.odds - a.odds).map((option, index) => (
 		<BetOption key={index} option={option} />
 	));
 
