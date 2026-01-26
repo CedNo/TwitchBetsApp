@@ -6,6 +6,7 @@ import { BetQuestion } from "@/app/types/bet-question";
 import { useState, useEffect } from "react";
 import { FaRegHourglassHalf } from "react-icons/fa6";
 import { MdError } from "react-icons/md";
+import BetCardContainer from "../components/bet-card-container";
 
 export default function Home() {
   
@@ -51,8 +52,15 @@ export default function Home() {
     <BetCard key={index} betQuestion={betQuestion} />
   ));
 
+  if(betCards.length < 12) {
+    const emptyCards = Array.from({ length: 12 - betCards.length }, (_, index) => (
+      <BetCardContainer key={betCards.length + index}>{undefined}</BetCardContainer>
+    ));
+    betCards.push(...emptyCards);
+  }
+
   return (
-    <div className='my-10 m-auto w-5/6 items-center justify-center flex columns-4 flex-wrap'>
+    <div className='my-10 h-132 overflow-hidden m-auto w-5/6 items-center justify-center flex columns-4 flex-wrap'>
       {betCards}
     </div>
   );
