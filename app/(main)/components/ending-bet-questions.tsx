@@ -75,7 +75,7 @@ export default function EndingBetQuestions() {
   const className = `w-full h-132 ${heightClass} overflow-hidden flex items-center justify-center flex-wrap`;
 
   return (
-    <div className="my-10 w-5/6 m-auto">
+    <div className="my-10 sm:w-3/4 w-5/6 m-auto">
       <p className="my-4 font-bold text-2xl">Ending bet questions</p>
       <div className='rounded-lg p-4 bg-ternary-bg'>
         <div className={className}  >
