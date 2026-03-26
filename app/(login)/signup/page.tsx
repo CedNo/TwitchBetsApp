@@ -16,7 +16,12 @@ export default function SignUp() {
                 <div className="flex flex-col gap-1">
                     <input
                         value={username}
-                        className={`${(username.length > 20 || !username.match(/^[a-zA-Z0-9]+$/)) && username !== '' ? 'border-red-500 focus:!border-red-400' : ''} p-2 border rounded-md w-full focus:outline-none focus:border-secondary-button-hover`}
+                        className={
+                            `${(username.length > 20 || !username.match(/^[a-zA-Z0-9]+$/)) && username !== '' ?
+                                'border-red-500 focus:!border-red-400' :
+                                ''
+                            } p-2 border rounded-md w-full focus:outline-none focus:border-secondary-button-hover`
+                        }
                         type="text"
                         placeholder="Username"
                         onChange={(e) => setUsername(e.target.value)}

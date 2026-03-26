@@ -34,16 +34,18 @@ export default function ConfirmPasswordField() {
                     }
                 />
             </div>
-            {(!isPasswordLengthValid(password) && password !== "") ?
+            {(!isPasswordLengthValid(password) && password !== "") &&
                 <p className="text-red-500 text-sm">
                     Password must be between 8 and 64 characters.
-                </p> : 
-                <p className="text-sm invisible">|</p>
+                </p>
             }
-            {(!isValidMatch && confirmPassword !== "") ?
+            {(!isValidMatch && confirmPassword !== "") &&
                 <p className="text-red-500 text-sm">
                     Passwords do not match.
-                </p> : 
+                </p>
+            }
+            {((!isPasswordLengthValid(password) && password !== "") || (!isValidMatch && confirmPassword !== "")) ?
+                '' :
                 <p className="text-sm invisible">|</p>
             }
         </div>
