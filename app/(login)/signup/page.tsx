@@ -28,8 +28,6 @@ export default function SignUp() {
         setHasSubmitted(true);
         setIsLoading(true);
 
-        //TODO: REMOVE DELAY
-
         const success = await createUser({username, password, confirmPassword});
         
         setIsLoading(false);
