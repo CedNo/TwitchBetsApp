@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { API_BASE_URL } from '@/app/api/constants';
 import { User } from '@/app/types/user';
+import { UserCreation } from '@/app/types/user_creation';
 
 const API = axios.create({
     baseURL: API_BASE_URL,
@@ -11,11 +12,21 @@ const API = axios.create({
 
 export const getUser = async (username: string) => {
     try {
-        const response = await API.get(`/users/${username}`);
+        const response = await API.get(`/players/${username}`);
         const user: User = response.data;
         return user;
     } catch (error) {
         console.error('Error fetching user:', error);
         throw error;
+    }
+};
+
+export const createUser = async (userCreationData: UserCreation) => {
+    try {
+        await API.post('/players/create', userCreationData);
+        return true;
+    } catch (error) {
+        console.error('Error creating user:', error);
+        return false;
     }
 };

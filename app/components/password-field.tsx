@@ -40,7 +40,7 @@ export default function PasswordField({ className, value, placeholder, onChange 
                 onChange={(e) => onPasswordChange(e.target.value)}
                 autoComplete="current-password"
             />
-            <span className="flex justify-around h-[25px]" onClick={handleToggle}>
+            <span className="flex justify-around h-[25px] cursor-pointer" onClick={handleToggle}>
                 {icon}
             </span>
         </div>
