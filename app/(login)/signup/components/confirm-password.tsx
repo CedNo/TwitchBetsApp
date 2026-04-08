@@ -3,17 +3,22 @@
 import { useState } from "react";
 import PasswordField from "@/app/components/password-field";
 
-export default function ConfirmPasswordField() {
+export default function ConfirmPasswordField(
+        {password, setPassword, confirmPassword, setConfirmPassword}:
+        {password: string, setPassword: (password: string) => void, confirmPassword: string, setConfirmPassword: (confirmPassword: string) => void}
+    ) {
 
-    const [password, setPassword] = useState("");
-    const [confirmPassword, setConfirmPassword] = useState("");
     const [isValidMatch, setIsValidMatch] = useState(true);
+
+    function passwordHasError() {
+        return (!isPasswordLengthValid(password) && password !== "") || (!isValidMatch && confirmPassword !== "")
+    }
 
     return(
         <div className="flex flex-col gap-1">
             <div className="flex flex-col gap-4">
                 <PasswordField
-                    className={(!isPasswordLengthValid(password) && password !== "") || (!isValidMatch && confirmPassword !== "") ? "border-red-500 focus:!border-red-400" : ""}
+                    className={passwordHasError() ? "border-red-500 focus:!border-red-400" : ""}
                     value={password}
                     onChange={
                         (e) => {

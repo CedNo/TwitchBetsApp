@@ -23,9 +23,10 @@ export const getUser = async (username: string) => {
 
 export const createUser = async (userCreationData: UserCreation) => {
     try {
-        await API.post('/players', userCreationData);
+        await API.post('/players/create', userCreationData);
+        return true;
     } catch (error) {
         console.error('Error creating user:', error);
-        throw error;
+        return false;
     }
 };
