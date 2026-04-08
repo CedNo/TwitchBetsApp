@@ -19,8 +19,6 @@ export default function ConfirmPasswordField(
     }
 
     function passwordsHaveError() {
-        console.log("Password: " + password);
-        console.log("Confirm Password: " + confirmPassword);
         return passwordHasError() || confirmPassword === '';
     }
     
