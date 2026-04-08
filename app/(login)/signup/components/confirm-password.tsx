@@ -4,52 +4,78 @@ import { useState } from "react";
 import PasswordField from "@/app/components/password-field";
 
 export default function ConfirmPasswordField(
-        {password, setPassword, confirmPassword, setConfirmPassword}:
-        {password: string, setPassword: (password: string) => void, confirmPassword: string, setConfirmPassword: (confirmPassword: string) => void}
+        {password, setPassword, confirmPassword, setConfirmPassword, setHasError}:
+        {
+            password: string, setPassword: (password: string) => void,
+            confirmPassword: string, setConfirmPassword: (confirmPassword: string) => void,
+            setHasError: (hasError: boolean) => void
+        }
     ) {
 
     const [isValidMatch, setIsValidMatch] = useState(true);
 
     function passwordHasError() {
-        return (!isPasswordLengthValid(password) && password !== "") || (!isValidMatch && confirmPassword !== "")
+        return !isPasswordLengthValid(password) || !isValidMatch
     }
+
+    function passwordsHaveError() {
+        console.log("Password: " + password);
+        console.log("Confirm Password: " + confirmPassword);
+        return passwordHasError() || confirmPassword === '';
+    }
+    
+    setHasError(passwordsHaveError());
 
     return(
         <div className="flex flex-col gap-1">
             <div className="flex flex-col gap-4">
-                <PasswordField
-                    className={passwordHasError() ? "border-red-500 focus:!border-red-400" : ""}
-                    value={password}
-                    onChange={
-                        (e) => {
-                            setPassword(e);
-                            setIsValidMatch(passwordsMatch(e, confirmPassword));
+                <div className="flex flex-col gap-1">
+                    <PasswordField
+                        className={passwordHasError() ? "border-red-500 focus:!border-red-400" : ""}
+                        value={password}
+                        onChange={
+                            (e) => {
+                                setPassword(e);
+                                setIsValidMatch(passwordsMatch(e, confirmPassword));
+                            }
                         }
+                    />
+                    {password === "" &&
+                        <p className="text-red-500 text-sm">
+                            Password is required.
+                        </p>
                     }
-                />
-                <PasswordField
-                    className={!isValidMatch && confirmPassword !== "" ? "border-red-500 focus:!border-red-400" : ""}
-                    placeholder="Confirm Password"
-                    value={confirmPassword}
-                    onChange={
-                        (e) => {
-                            setConfirmPassword(e);
-                            setIsValidMatch(passwordsMatch(password, e));
+                </div>
+                <div className="flex flex-col gap-1">
+                    <PasswordField
+                        className={!isValidMatch || confirmPassword === "" ? "border-red-500 focus:!border-red-400" : ""}
+                        placeholder="Confirm Password"
+                        value={confirmPassword}
+                        onChange={
+                            (e) => {
+                                setConfirmPassword(e);
+                                setIsValidMatch(passwordsMatch(password, e));
+                            }
                         }
+                    />
+                    {confirmPassword === "" &&
+                        <p className="text-red-500 text-sm">
+                            Password must be confirmed.
+                        </p>
                     }
-                />
+                </div>
             </div>
-            {(!isPasswordLengthValid(password) && password !== "") &&
+            {!isPasswordLengthValid(password) && password !== "" &&
                 <p className="text-red-500 text-sm">
                     Password must be between 8 and 64 characters.
                 </p>
             }
-            {(!isValidMatch && confirmPassword !== "") &&
+            {!isValidMatch &&
                 <p className="text-red-500 text-sm">
                     Passwords do not match.
                 </p>
             }
-            {((!isPasswordLengthValid(password) && password !== "") || (!isValidMatch && confirmPassword !== "")) ?
+            {!isPasswordLengthValid(password) || !isValidMatch ?
                 '' :
                 <p className="text-sm invisible">|</p>
             }

@@ -5,7 +5,7 @@ export default function ErrorState({setHasSubmitted}: {setHasSubmitted: (hasSubm
     return (
         <div className="mx-auto flex flex-col gap-6 items-center">
             <MdError size={96}/>
-            <p className="text-lg px-6">An error occurred while creating your account.</p>
+            <p className="text-lg">An error occurred while creating your account.</p>
             <Button 
                 className="p-2 rounded-md bg-secondary-button hover:bg-secondary-button-hover transition mx-auto"
                 onClick={() => setHasSubmitted(false)}
