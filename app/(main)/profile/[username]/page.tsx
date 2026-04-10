@@ -1,13 +1,11 @@
 'use client'
 
 import React from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { formatNumber } from "@/app/utilities";
 import Chart from "@/app/components/chart";
 import { useState, useEffect } from "react";
 import { FaRegHourglassHalf } from "react-icons/fa6";
-import { FaRegClock } from "react-icons/fa";
 import { MdError } from "react-icons/md";
 import { Wager } from "@/app/types/wager";
 
@@ -15,6 +13,7 @@ import { CHART_DATA } from "@/app/constants";
 import { getUser } from "@/app/api/services/user_service";
 import { getLatestBets } from "@/app/api/services/bet_service";
 import { User } from "@/app/types/user";
+import LatestWagers from "./components/latest-wagers";
 
 export default function Profile({
 		params,
@@ -58,9 +57,9 @@ export default function Profile({
         fetchLatestBets();
     }, [username]);
 
-    const wageredPoints = 750000;
     const availablePoints = user.balance;
-    const totalPoints = wageredPoints + availablePoints;
+    const totalPoints = user.totalPoints;
+    const wageredPoints = totalPoints - availablePoints;
 
     const wageredPointsText = formatNumber(wageredPoints, 2);
     const availablePointsText = formatNumber(availablePoints, 2);
@@ -116,44 +115,10 @@ export default function Profile({
             <div className="flex flex-col gap-4 bg-secondary-bg rounded-lg p-4">
                 <p className="text-3xl">Latest bets</p>
                 <div className="flex flex-col gap-2">
-                    {showLatestWagers(wagers)}
+                    <LatestWagers wagers={wagers}/>
                 </div>
                 <Link href={`/profile/${username}/bets`} className="w-fit pl-4 text-link hover:underline">View complete history</Link>
             </div>
         </div>
     );
-}
-
-function showLatestWagers(wagers : Wager[]) {
-    const latestWagers = [] as React.ReactNode[];
-
-    wagers.forEach((wager, key) => {
-        const isPending = wager.betWin === 0;
-        const hasWon = wager.betWin > 0;
-
-        const color = hasWon ? "text-green-400" : "text-red-400";
-        const symbol = hasWon ? "+" : "-";
-        const text = symbol + "$" + formatNumber(Math.abs(wager.betWin), 2);
-
-        latestWagers.push(
-            <div key={key} className="flex flex-row justify-between gap-3 p-2 hover:[&>div_a_h3]:line-clamp-4 hover:bg-ternary-bg rounded-md duration-200 ease-in-out items-center">
-                <div className="w-2/3">
-                    <Link href={`/bet/${wager.betQuestionId}`} className="flex items-center justify-start w-fit">
-                        <Image src="/coin.png" width={100} height={100} alt="Bet Image" className="w-8 h-8 rounded-full mr-2" />
-                        <h3 className="line-clamp-2 sm:line-clamp-1">{wager.betQuestion}</h3>
-                    </Link>
-                </div>
-                <div className="w-1/3 font-bold text-right items-end">
-                    {
-                        isPending ? 
-                        <div className="flex flex-row space-x-1 w-fit ml-auto"><FaRegClock className="inline my-auto size-5"/><p className="w-1/3 font-bold text-right whitespace-nowrap">In progress</p></div> :
-                        <p className={`${color}`}>{text}</p>
-                    }
-                </div>
-            </div>
-        );
-        
-    });
-
-    return latestWagers;
 }
