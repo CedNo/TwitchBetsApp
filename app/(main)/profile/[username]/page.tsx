@@ -57,9 +57,9 @@ export default function Profile({
         fetchLatestBets();
     }, [username]);
 
-    const wageredPoints = 750000;
     const availablePoints = user.balance;
-    const totalPoints = wageredPoints + availablePoints;
+    const totalPoints = user.totalPoints;
+    const wageredPoints = totalPoints - availablePoints;
 
     const wageredPointsText = formatNumber(wageredPoints, 2);
     const availablePointsText = formatNumber(availablePoints, 2);
