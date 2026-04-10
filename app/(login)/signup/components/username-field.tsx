@@ -1,20 +1,21 @@
+import { useEffect } from "react";
+
 export default function UsernameField(
     {username, setUsername, setHasError}:
     {username: string, setUsername: (username: string) => void, setHasError: (hasError: boolean) => void}
 ) {
 
-    function usernameHasError() {
-        return username.length > 20 || !username.match(/^[a-zA-Z0-9]+$/) || username === '';
-    }
-
-    setHasError(usernameHasError());
+    useEffect(() => {
+        const hasError = usernameHasError(username);
+        setHasError(hasError);
+    }, [username, setHasError]);
 
     return (
         <div className="flex flex-col gap-1">
                     <input
                         value={username}
                         className={
-                            `${usernameHasError() ?
+                            `${usernameHasError(username) ?
                                 'border-red-500 focus:!border-red-400' :
                                 ''
                             } p-2 border rounded-md w-full focus:outline-none focus:border-secondary-button-hover`
@@ -41,5 +42,9 @@ export default function UsernameField(
                         </p>
                     }
                 </div>
-    )
-};
+    );
+}
+
+function usernameHasError(username: string) {
+    return username.length > 20 || !username.match(/^[a-zA-Z0-9]+$/) || username === '';
+}
