@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PasswordField from "@/app/components/password-field";
 
 export default function ConfirmPasswordField(
@@ -13,23 +13,18 @@ export default function ConfirmPasswordField(
     ) {
 
     const [isValidMatch, setIsValidMatch] = useState(true);
-
-    function passwordHasError() {
-        return !isPasswordLengthValid(password) || !isValidMatch
-    }
-
-    function passwordsHaveError() {
-        return passwordHasError() || confirmPassword === '';
-    }
     
-    setHasError(passwordsHaveError());
+    useEffect(() => {
+        const hasError = passwordsHaveError(password, confirmPassword, isValidMatch);
+        setHasError(hasError);
+    }, [password, confirmPassword, isValidMatch, setHasError]);
 
     return(
         <div className="flex flex-col gap-1">
             <div className="flex flex-col gap-4">
                 <div className="flex flex-col gap-1">
                     <PasswordField
-                        className={passwordHasError() ? "border-red-500 focus:!border-red-400" : ""}
+                        className={passwordHasError(password, isValidMatch) ? "border-red-500 focus:!border-red-400" : ""}
                         value={password}
                         onChange={
                             (e) => {
@@ -79,6 +74,14 @@ export default function ConfirmPasswordField(
             }
         </div>
     );
+}
+
+function passwordHasError(password: string, isValidMatch: boolean) {
+    return !isPasswordLengthValid(password) || !isValidMatch
+}
+
+function passwordsHaveError(password: string, confirmPassword: string, isValidMatch: boolean) {
+    return passwordHasError(password, isValidMatch) || confirmPassword === '';
 }
 
 function isPasswordLengthValid(password: string) {
