@@ -35,12 +35,9 @@ export default function SignUp() {
 
         if(success) {
             await new Promise(res => setTimeout(res, 2000));
-            redirect("/");
+            redirect("/login");
         }
     }
-
-    console.log("Username error: " + hasUsernameError);
-    console.log("Password error: " + hasPasswordError);
 
     return (
         <div className='w-full md:w-1/2 lg:w-5/16 flex flex-col gap-4 my-10 mx-auto bg-secondary-bg rounded-xl p-10 shadow-xl'>
