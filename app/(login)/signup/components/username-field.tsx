@@ -1,3 +1,4 @@
+import InputField from "@/app/components/input-field";
 import { useEffect } from "react";
 
 export default function UsernameField(
@@ -12,7 +13,7 @@ export default function UsernameField(
 
     return (
         <div className="flex flex-col gap-1">
-                    <input
+                    <InputField
                         value={username}
                         className={
                             `${usernameHasError(username) ?
@@ -22,9 +23,9 @@ export default function UsernameField(
                         }
                         type="text"
                         placeholder="Username"
-                        onChange={(e) => {
-                            setUsername(e.target.value);
-                        }}
+                        onChange={setUsername}
+                        name="username"
+                        autoComplete="username"
                     />
                     {username.length > 20 &&
                         <p className="text-red-500 text-sm">
