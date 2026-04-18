@@ -7,18 +7,21 @@ import { useState, useEffect } from "react";
 import { FaRegHourglassHalf } from "react-icons/fa6";
 import { MdError } from "react-icons/md";
 import PlaceholderBetCard from "@/app/components/placeholder-bet-card";
-import CreateNewBetCard from "@/app/components/create-new-bets-card";
+import CreateNewBetCard from "@/app/components/create-new-bet-card";
+import { getUsername } from '@/app/api/services/cookies_service';
 
 export default function EndingBetQuestions() {
   
   const [endingBetQuestions, setEndingBetQuestions] = useState({} as BetQuestion[]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [username, setUsername] = useState("");
 
   useEffect(() => {
     async function fetchEndingBetQuestions() {
         try {
             setLoading(true);
+            setUsername(await getUsername());
             const endingBetQuestions = await getEndingBetQuestions(12);
             setEndingBetQuestions(endingBetQuestions);
         } catch (error) {
@@ -62,9 +65,13 @@ export default function EndingBetQuestions() {
       nbrCardsToAdd = 7 - betCards.length;
       heightClass = 'lg:h-88';
     }
-    
-    const createNewBetCard = <CreateNewBetCard key="create-new-bet-card" />;
-    betCards.push(createNewBetCard);
+
+    if(username === "") {
+      nbrCardsToAdd += 1;
+    } else {
+      const createNewBetCard = <CreateNewBetCard key="create-new-bet-card" />;
+      betCards.push(createNewBetCard);
+    }
 
     const emptyCards = Array.from({ length: nbrCardsToAdd }, (_, index) => (
       <PlaceholderBetCard key={betCards.length + index}></PlaceholderBetCard>
