@@ -21,14 +21,32 @@ export const getEndingBetQuestions = async (amount: number) => {
     }
 };
 
-export const getBetQuestionById = async (betId: string) => {
+export const getBetQuestionById = async (betQuestionId: string) => {
     try {
-        const response = await API.get<BetQuestion>(`/bets/questions/${betId}`);
+        const response = await API.get<BetQuestion>(`/bets/questions/${betQuestionId}`);
         const question = response.data;
 
         return question;
     } catch (error) {
-        console.error('Error fetching bet question for id %s:', betId, error);
+        console.error('Error fetching bet question for id %s:', betQuestionId, error);
+        throw error;
+    }
+};
+
+export const createBetQuestion = async (question: string, options: string[], endTime: string) => {
+    try {
+        const response = await API.post<BetQuestion>('/bets/questions', {
+                question,
+                options,
+                endTime
+            },
+            {withCredentials: true}
+        );
+
+        console.log('Bet question created successfully:', response.data);
+        return response.data;
+    } catch (error) {
+        console.error('Error creating bet question:', error);
         throw error;
     }
 };

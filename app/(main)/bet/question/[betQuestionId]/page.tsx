@@ -1,7 +1,7 @@
 'use client'
 
 import React from "react";
-import BetOption from "@/app/(main)/bet/[betId]/components/bet-option";
+import BetOption from "@/app/(main)/bet/question/[betQuestionId]/components/bet-option";
 import { FaRegClock } from "react-icons/fa"
 import { FaRegHourglassHalf } from "react-icons/fa6";
 import { MdError } from "react-icons/md";
@@ -15,10 +15,10 @@ import type { BetSeries } from "@/app/types/chart-data";
 export default function BetPage({
 		params,
 	}: {
-		params: Promise<{ betId: string }>
+		params: Promise<{ betQuestionId: string }>
 	}) {
 
-    const { betId } = React.use(params);
+    const { betQuestionId } = React.use(params);
 
 	const [betQuestion, setBetQuestion] = useState({} as BetQuestion);
 	const [loading, setLoading] = useState(true);
@@ -28,7 +28,7 @@ export default function BetPage({
 		async function fetchBetQuestionById() {
 			try {
 				setLoading(true);
-				const betQuestion = await getBetQuestionById(betId);
+				const betQuestion = await getBetQuestionById(betQuestionId);
 				setBetQuestion(betQuestion);
 			} catch (error) {
 				console.error('Failed to fetch bet question:', error);
@@ -38,7 +38,7 @@ export default function BetPage({
 			}
 		}
 		fetchBetQuestionById();
-	}, [betId]);
+	}, [betQuestionId]);
 
 	if(loading) {
 		return (

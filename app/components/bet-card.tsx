@@ -6,7 +6,7 @@ import Link from "next/link";
 export default function BetCard({ betQuestion }: { betQuestion : BetQuestion }) {
 
     return (
-        <Link href={`/bet/${encodeURIComponent(betQuestion.id)}`}>
+        <Link href={`/bet/question/${encodeURIComponent(betQuestion.id)}`}>
             <BetCardContainer>
                 <div className="flex items-center justify-start mb-2 mr-auto">
                     <Image src='/coin.png' width={100} height={100} alt="Bet Image" className="w-8 h-8 rounded-full mr-2" />
