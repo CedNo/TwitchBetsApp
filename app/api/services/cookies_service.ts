@@ -11,3 +11,8 @@ export async function setCookie(name: string, value: string, options?: { path?: 
     const cookieStore = await cookies();
     cookieStore.set(name, value, options);
 }
+
+export async function getUsername() : Promise<string> {
+    const loggedInUsername = await getCookie('username');
+    return loggedInUsername ? loggedInUsername : "";
+}

@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import Button from '@/app/components/button';
 import { IoMenu } from "react-icons/io5";
 import { IoMdArrowRoundBack } from "react-icons/io";
-import { getCookie } from '../api/services/cookies_service';
+import { getUsername } from '../api/services/cookies_service';
 
 
 export default function Navbar({ hideButtons=false } : { hideButtons? : boolean }) {
@@ -40,9 +40,4 @@ export default function Navbar({ hideButtons=false } : { hideButtons? : boolean 
             </Button>
         </div>
     );
-}
-
-async function getUsername() {
-    const loggedInUsername = await getCookie('username');
-    return loggedInUsername ? loggedInUsername : "";
 }

@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { FaEye } from "react-icons/fa6";
 import { FaEyeSlash } from "react-icons/fa6";
+import InputField from './input-field';
 
 export default function PasswordField({ className, value, placeholder, onChange } : { className? : string, value : string, placeholder? : string, onChange? : (a : string) => void }) {
 
@@ -31,13 +32,13 @@ export default function PasswordField({ className, value, placeholder, onChange 
     
     return (
         <div className="flex items-center">
-            <input
-                className={`${className} w-full pr-8 border p-2 rounded-md focus:outline-none focus:border-secondary-button-hover`}
+            <InputField
+                className={className}
                 type={type}
                 name="password"
                 placeholder={ placeholder ?? "Password"}
                 value={password}
-                onChange={(e) => onPasswordChange(e.target.value)}
+                onChange={onPasswordChange}
                 autoComplete="current-password"
             />
             <span className="flex justify-around h-[25px] cursor-pointer" onClick={handleToggle}>

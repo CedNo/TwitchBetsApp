@@ -6,6 +6,7 @@ import PasswordField from "@/app/components/password-field";
 import { useState } from "react";
 import { loginUser } from "@/app/api/services/user_service";
 import { redirect } from "next/navigation";
+import InputField from "@/app/components/input-field";
 
 export default function Login() {
 
@@ -24,12 +25,12 @@ export default function Login() {
         <div className="px-4 md:px-0">
             <form className="w-full md:w-1/2 lg:w-5/16 flex flex-col gap-4 my-10 mx-auto bg-secondary-bg rounded-xl p-10 shadow-xl" onSubmit={(e) => e.preventDefault()}>
                 <h1 className="text-3xl font-bold text-center pb-4">Welcome back!</h1>
-                <input
+                <InputField
                     className="p-2 border rounded-md w-full focus:outline-none focus:border-secondary-button-hover"
                     type="text"
                     placeholder="Username"
                     value={username}
-                    onChange={(e) => setUsername(e.target.value)}
+                    onChange={setUsername}
                 />
                 <PasswordField value={password} onChange={(e) => setPassword(e)} />
                 <div className="flex flex-row justify-between text-sm">
