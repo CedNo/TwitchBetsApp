@@ -80,11 +80,7 @@ export default function NewBetQuestionPage() {
                     + Add new option
                 </Button>
                 <h2>End date and time</h2>
-<<<<<<< HEAD
-                <InputField value={endDateTime} onChange={setEndDateTime} />
-=======
                 <InputField value={endDateTime} onChange={setEndDateTime} placeholder="2026-12-12 00:00:00"/>
->>>>>>> c915570 (Added link to create new bet card)
                 <Button className="w-full p-2 rounded-md bg-secondary-button hover:bg-secondary-button-hover transition mx-auto" onClick={handleSubmit}>
                     Create bet question
                 </Button>
