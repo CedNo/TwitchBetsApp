@@ -7,6 +7,7 @@ import { useState } from "react";
 import { createBetQuestion } from "@/app/api/services/bet_service";
 
 import { MdRemove } from "react-icons/md";
+import UserProtectedRoute from "@/app/components/routing/user-protected-route";
 
 export default function NewBetQuestionPage() {
 
@@ -69,22 +70,24 @@ export default function NewBetQuestionPage() {
     }
 
     return (
-        <div className="w-full md:w-1/2 lg:w-5/16 flex flex-col gap-4 my-10 mx-auto bg-secondary-bg rounded-xl p-10 shadow-xl">
-            <h1 className="text-3xl font-bold">Create a new bet question</h1>
-            <div className="flex flex-col gap-4 font-bold">
-                <h2>Question</h2>
-                <InputField value={question} onChange={setQuestion} />
-                <h2>Options</h2>
-                {getOptionsInputs()}
-                <Button className="p-2 rounded-md bg-secondary-button hover:bg-secondary-button-hover transition mx-auto" onClick={addInput}>
-                    + Add new option
-                </Button>
-                <h2>End date and time</h2>
-                <InputField value={endDateTime} onChange={setEndDateTime} placeholder="2026-12-12 00:00:00"/>
-                <Button className="w-full p-2 rounded-md bg-secondary-button hover:bg-secondary-button-hover transition mx-auto" onClick={handleSubmit}>
-                    Create bet question
-                </Button>
+        <UserProtectedRoute>
+            <div className="w-full md:w-1/2 lg:w-5/16 flex flex-col gap-4 my-10 mx-auto bg-secondary-bg rounded-xl p-10 shadow-xl">
+                <h1 className="text-3xl font-bold">Create a new bet question</h1>
+                <div className="flex flex-col gap-4 font-bold">
+                    <h2>Question</h2>
+                    <InputField value={question} onChange={setQuestion} />
+                    <h2>Options</h2>
+                    {getOptionsInputs()}
+                    <Button className="p-2 rounded-md bg-secondary-button hover:bg-secondary-button-hover transition mx-auto" onClick={addInput}>
+                        + Add new option
+                    </Button>
+                    <h2>End date and time</h2>
+                    <InputField value={endDateTime} onChange={setEndDateTime} placeholder="2026-12-12 00:00:00"/>
+                    <Button className="w-full p-2 rounded-md bg-secondary-button hover:bg-secondary-button-hover transition mx-auto" onClick={handleSubmit}>
+                        Create bet question
+                    </Button>
+                </div>
             </div>
-        </div>
+        </UserProtectedRoute>
     );
 }

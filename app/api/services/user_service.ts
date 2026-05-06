@@ -1,15 +1,7 @@
-import axios from 'axios';
-import { API_BASE_URL } from '@/app/api/constants';
+import { API } from "../api";
 import { User } from '@/app/types/user';
 import { UserCreation } from '@/app/types/user_creation';
 import { getCookie, setCookie } from './cookies_service';
-
-const API = axios.create({
-    baseURL: API_BASE_URL,
-    headers: {
-        'Content-Type': 'application/json',
-    },
-});
 
 export const getUser = async (username: string) => {
     try {

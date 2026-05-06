@@ -1,14 +1,6 @@
-import axios from 'axios';
-import { API_BASE_URL } from '@/app/api/constants';
+import { API } from "../api";
 import { BetQuestion } from '@/app/types/bet-question';
 import { Wager } from '@/app/types/wager';
-
-const API = axios.create({
-    baseURL: API_BASE_URL,
-    headers: {
-        'Content-Type': 'application/json',
-    },
-});
 
 export const getEndingBetQuestions = async (amount: number) => {
     try {
