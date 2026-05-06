@@ -8,20 +8,20 @@ import { FaRegHourglassHalf } from "react-icons/fa6";
 import { MdError } from "react-icons/md";
 import PlaceholderBetCard from "@/app/components/placeholder-bet-card";
 import CreateNewBetCard from "@/app/components/create-new-bet-card";
-import { getUsername } from '@/app/api/services/cookies_service';
+import { verifyOptimisticAuthentication } from "@/app/api/services/auth_middleware";
 
 export default function EndingBetQuestions() {
   
   const [endingBetQuestions, setEndingBetQuestions] = useState({} as BetQuestion[]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
-  const [username, setUsername] = useState("");
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
     async function fetchEndingBetQuestions() {
         try {
             setLoading(true);
-            setUsername(await getUsername());
+            setIsAuthenticated(await verifyOptimisticAuthentication());
             const endingBetQuestions = await getEndingBetQuestions(12);
             setEndingBetQuestions(endingBetQuestions);
         } catch (error) {
@@ -66,7 +66,7 @@ export default function EndingBetQuestions() {
       heightClass = 'lg:h-88';
     }
 
-    if(username === "") {
+    if(!isAuthenticated) {
       nbrCardsToAdd += 1;
     } else {
       const createNewBetCard = <CreateNewBetCard key="create-new-bet-card" />;
