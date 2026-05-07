@@ -40,7 +40,7 @@ export default function SignUp() {
     }
 
     return (
-        <div className='w-full md:w-1/2 lg:w-5/16 flex flex-col gap-4 my-10 mx-auto bg-secondary-bg rounded-xl p-10 shadow-xl'>
+        <div className='my-auto w-full h-fit md:w-1/2 lg:w-5/16 flex flex-col gap-4 mx-auto bg-secondary-bg rounded-xl p-10 shadow-xl'>
             {hasSubmitted ?
                 (isLoading ? 
                     <LoadingState  /> :

@@ -27,7 +27,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <div className="flex flex-col h-screen justify-between">
+        <div className="grid grid-rows-[auto_1fr_auto] min-h-screen m-0">
           <Navbar hideButtons={true} />
           {children}
           <Footer hideLinks={true} />

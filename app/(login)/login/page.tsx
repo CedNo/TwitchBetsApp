@@ -26,10 +26,10 @@ export default function Login() {
     }
 
     return (
-        <>
+        <div className={`flex flex-col gap-20 ${mustLogin ? "" : "my-auto"}`}>
             {mustLogin && <Banner message="You must login to access that page" color="bg-error-banner" />}
             <div className="px-4 md:px-0">
-                <form className="w-full md:w-1/2 lg:w-5/16 flex flex-col gap-4 my-10 mx-auto bg-secondary-bg rounded-xl p-10 shadow-xl" onSubmit={(e) => e.preventDefault()}>
+                <form className="w-full md:w-1/2 lg:w-5/16 flex flex-col gap-4 mx-auto bg-secondary-bg rounded-xl p-10 shadow-xl" onSubmit={(e) => e.preventDefault()}>
                     <h1 className="text-3xl font-bold text-center pb-4">Welcome back!</h1>
                     <InputField
                         className="p-2 border rounded-md w-full focus:outline-none focus:border-secondary-button-hover"
@@ -64,6 +64,6 @@ export default function Login() {
                     </div>
                 </form>
             </div>
-        </>
+        </div>
     );
 }
