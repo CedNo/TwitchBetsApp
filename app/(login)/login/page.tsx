@@ -16,12 +16,22 @@ export default function Login() {
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [errorMessage , setErrorMessage] = useState("");
 
     async function handleSubmit() {
-        const success = await loginUser(username, password);
+        const code = await loginUser(username, password);
 
-        if(success) {
+        if(code === 200) {
             redirect("/");
+        }
+
+        else {
+            if(code === 401) {
+                setErrorMessage("Invalid username or password");
+            }
+            else {
+                setErrorMessage("An error occurred while logging in. Please try again later.");
+            }
         }
     }
 
@@ -39,6 +49,7 @@ export default function Login() {
                         onChange={setUsername}
                     />
                     <PasswordField value={password} onChange={(e) => setPassword(e)} />
+                    {errorMessage && <p className="text-red-500 text-sm">{errorMessage}</p>}
                     <div className="flex flex-row justify-between text-sm">
                         <label className="flex items-center gap-2">
                             <input type="checkbox" className="w-3 h-3" />

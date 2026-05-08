@@ -2,6 +2,7 @@ import { API } from "../api";
 import { User } from '@/app/types/user';
 import { UserCreation } from '@/app/types/user_creation';
 import { getCookie, setCookie } from './cookies_service';
+import { AxiosError } from "axios";
 
 export const getUser = async (username: string) => {
     try {
@@ -24,7 +25,7 @@ export const createUser = async (userCreationData: UserCreation) => {
     }
 };
 
-export const loginUser = async (username: string, password: string) => {
+export const loginUser = async (username: string, password: string) : Promise<number> => {
     try {
         await API.post('/players/login', { username, password }, {withCredentials: true});
 
@@ -32,9 +33,14 @@ export const loginUser = async (username: string, password: string) => {
         await setCookie('JSESSIONID', sessionId?.toString() || '', { path: '/', maxAge: 60 * 60 * 24, httpOnly: true });
         await setCookie('username', username, { path: '/', maxAge: 60 * 60 * 24 });
 
-        return true;
+        return 200;
     } catch (error) {
         console.error('Error logging in user:', error);
-        return false;
+
+        if (error instanceof AxiosError) {
+            return error.response?.status || 500;
+        }
+
+        return 500;
     }
 };
