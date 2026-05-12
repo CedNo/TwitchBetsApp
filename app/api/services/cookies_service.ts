@@ -16,3 +16,8 @@ export async function getUsername() : Promise<string> {
     const loggedInUsername = await getCookie('username');
     return loggedInUsername ? loggedInUsername : "";
 }
+
+export async function removeCookie(name: string, domain: string, path: string) {
+    const cookieStore = await cookies();
+    cookieStore.delete({name: name, domain: domain, path: path});
+}

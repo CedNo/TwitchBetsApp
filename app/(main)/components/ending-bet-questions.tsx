@@ -4,11 +4,11 @@ import BetCard from "@/app/components/bet-card";
 import { getEndingBetQuestions } from "@/app/api/services/bet_service";
 import { BetQuestion } from "@/app/types/bet-question";
 import { useState, useEffect } from "react";
-import { FaRegHourglassHalf } from "react-icons/fa6";
 import { MdError } from "react-icons/md";
 import PlaceholderBetCard from "@/app/components/placeholder-bet-card";
 import CreateNewBetCard from "@/app/components/create-new-bet-card";
 import { verifyOptimisticAuthentication } from "@/app/api/services/auth_middleware";
+import Loading from "@/app/components/loading";
 
 export default function EndingBetQuestions() {
   
@@ -36,10 +36,7 @@ export default function EndingBetQuestions() {
 
   if(loading) {
     return (
-        <div className="flex flex-col gap-2 items-center">
-            <FaRegHourglassHalf className="text-5xl"/>
-            <p className="text-3xl">Loading ending bet questions...</p>
-        </div>
+        <Loading text="Loading ending bet questions..." />
     );
   }
 
