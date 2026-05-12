@@ -1,16 +1,41 @@
 import { verifySecureAuthentication } from '@/app/api/services/auth_middleware';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { redirect } from "next/navigation";
+import Loading from '../loading';
 
-export default async function UserProtectedRoute ({ children }: { children: React.ReactNode }) {
+export default function UserProtectedRoute ({ children }: { children: React.ReactNode }) {
 
-    const isAuthenticated = await verifySecureAuthentication();
+    const [loading, setLoading] = useState(true);
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-    
-    if (!isAuthenticated) {
-        redirect('/login?mustLogin=true');
+    useEffect(() => {
+        async function verifyAuth() {
+            try {
+                setLoading(true);
+
+                const isAuthenticated = await verifySecureAuthentication();
+                setIsAuthenticated(isAuthenticated);
+            } catch (error) {
+                console.error('Error verifying authentication:', error);
+                redirect('/login?mustLogin=true');
+            } finally {
+                setLoading(false);
+            }
+        }
+        verifyAuth();
+      }, []);
+
+    if(loading) {
+        return (
+            <Loading text="Verifying authentication..." />
+        )
     }
     else {
-        return children;
+        if (!isAuthenticated) {
+            redirect('/login?mustLogin=true');
+        }
+        else {
+            return children;
+        }
     }
 }

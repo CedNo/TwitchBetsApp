@@ -1,5 +1,5 @@
 import { API } from "../api";
-import { getUsername } from "./cookies_service";
+import { getUsername, removeCookie } from "./cookies_service";
 
 export async function verifyOptimisticAuthentication() : Promise<boolean> {
     const loggedInUsername = await getUsername();
@@ -13,12 +13,21 @@ export async function verifySecureAuthentication() : Promise<boolean> {
         if(response.status === 200) {
             return true;
         }
-        else {
-            return false;
-        }
+
+        await removeSessionCookies();
+
+        return false;
         
     } catch (error) {
         console.error('Error verifying session:', error);
+        
+        await removeSessionCookies();
+
         return false;
     }
+}
+
+export async function removeSessionCookies() {
+    await removeCookie('username', 'localhost', '/');
+    await removeCookie('JSESSIONID', 'localhost', '/');
 }
